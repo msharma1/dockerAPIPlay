@@ -1,0 +1,60 @@
+[ec2-user@ip-172-31-17-241 dockerProject]$ docker build -t ip_forecast:1.0 .
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.40/build?buildargs=%7B%7D&cachefrom=%5B%5D&cgroupparent=&cpuperiod=0&cpuquota=0&cpusetcpus=&cpusetmems=&cpushares=0&dockerfile=dockerfile&labels=%7B%7D&memory=0&memswap=0&networkmode=default&rm=1&session=a9d59pvwuh4fhaxixo3umqpqt&shmsize=0&t=ip_forecast%3A1.0&target=&ulimits=null&version=1: dial unix /var/run/docker.sock: connect: permission denied
+[ec2-user@ip-172-31-17-241 dockerProject]$ sudo  docker build -t ip_forecast:1.0 .
+Sending build context to Docker daemon  18.94kB
+Step 1/4 : FROM debian:buster-slim
+buster-slim: Pulling from library/debian
+a076a628af6f: Pull complete
+Digest: sha256:59678da095929b237694b8cbdbe4818bb89a2918204da7fa0145dc4ba5ef22f9
+Status: Downloaded newer image for debian:buster-slim
+ ---> 589ac6f94be4
+Step 2/4 : RUN apt-get update  && apt-get -y --no-install-recommends install     jq  && apt-get clean  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ ---> Running in f539f129204d
+Get:1 http://deb.debian.org/debian buster InRelease [121 kB]
+Get:2 http://security.debian.org/debian-security buster/updates InRelease [65.4 kB]
+Get:3 http://deb.debian.org/debian buster-updates InRelease [51.9 kB]
+Get:4 http://security.debian.org/debian-security buster/updates/main amd64 Packages [261 kB]
+Get:5 http://deb.debian.org/debian buster/main amd64 Packages [7907 kB]
+Get:6 http://deb.debian.org/debian buster-updates/main amd64 Packages [7860 B]
+Fetched 8415 kB in 2s (4631 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libjq1 libonig5
+The following NEW packages will be installed:
+  jq libjq1 libonig5
+0 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+Need to get 355 kB of archives.
+After this operation, 1072 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian buster/main amd64 libonig5 amd64 6.9.1-1 [171 kB]
+Get:2 http://deb.debian.org/debian buster/main amd64 libjq1 amd64 1.5+dfsg-2+b1 [124 kB]
+Get:3 http://deb.debian.org/debian buster/main amd64 jq amd64 1.5+dfsg-2+b1 [59.4 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 355 kB in 0s (7224 kB/s)
+Selecting previously unselected package libonig5:amd64.
+(Reading database ... 6460 files and directories currently installed.)
+Preparing to unpack .../libonig5_6.9.1-1_amd64.deb ...
+Unpacking libonig5:amd64 (6.9.1-1) ...
+Selecting previously unselected package libjq1:amd64.
+Preparing to unpack .../libjq1_1.5+dfsg-2+b1_amd64.deb ...
+Unpacking libjq1:amd64 (1.5+dfsg-2+b1) ...
+Selecting previously unselected package jq.
+Preparing to unpack .../jq_1.5+dfsg-2+b1_amd64.deb ...
+Unpacking jq (1.5+dfsg-2+b1) ...
+Setting up libonig5:amd64 (6.9.1-1) ...
+Setting up libjq1:amd64 (1.5+dfsg-2+b1) ...
+Setting up jq (1.5+dfsg-2+b1) ...
+Processing triggers for libc-bin (2.28-10) ...
+Removing intermediate container f539f129204d
+ ---> d26da5fe9e71
+Step 3/4 : COPY ip_forecast.sh /data/ip_forecast.sh
+ ---> 560450cb347c
+Step 4/4 : ENTRYPOINT ["/data/ip_forecast.sh"]
+ ---> Running in f364a0ffda34
+Removing intermediate container f364a0ffda34
+ ---> 3cb0b97a3daa
+Successfully built 3cb0b97a3daa
+Successfully tagged ip_forecast:1.0
+

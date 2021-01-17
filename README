@@ -1,0 +1,17 @@
+#Linux Type used
+CentOS 7
+
+#Installations
+yum install jq
+yum install docker
+
+#dockerfile: Submitted with code
+
+#Docker instructions
+(1) Build and tag
+      sudo  docker build -t ip_forecast:1.0 .
+(2) Run container that executes shell script with IP given at runtime
+      sudo docker run ip_forecast:1.0 1.1.1.1
+(3) Run container that executes shell script without any IP given at runtime
+      sudo docker run ip_forecast:1.0
+	
